@@ -27,12 +27,45 @@ export function buildExceptionTaxonomy(cases) {
 
 export function triagePilots(pilots) {
   return pilots.map((pilot) => {
-    const value = Number(pilot.valueEvidence) + Number(pilot.adoption) + Number(pilot.workflowFit);
-    const drag = Number(pilot.risk) + Number(pilot.integrationDebt) + Number(pilot.uncertainty);
+    const value = Number(pilot.valueEvidence) + Number(pilot.adoption) + Number(pilot.workflowFit) + Number(pilot.strategicValue ?? 0);
+    const drag = Number(pilot.risk) + Number(pilot.integrationDebt) + Number(pilot.uncertainty) + Number(pilot.changeCost ?? 0);
     const score = value - drag;
-    const decision = score >= 95 ? "scale" : score >= 45 ? "continue" : score >= 5 ? "narrow" : "stop";
-    return { ...pilot, score, decision };
+    const decision = score >= 130 ? "fund" : score >= 75 ? "defer" : score >= 25 ? "merge" : "kill";
+    const memo =
+      decision === "fund"
+        ? "Fund with named executive owner, integration budget, and a 90-day value proof."
+        : decision === "defer"
+          ? "Defer until the team proves baseline movement or lowers integration risk."
+          : decision === "merge"
+            ? "Merge into a stronger workflow initiative so the capability has a real operating home."
+            : "Kill or archive; this is not earning executive attention.";
+    return { ...pilot, score, decision, memo };
   }).sort((a, b) => b.score - a.score);
+}
+
+export function buildInvestmentMemo(pilots) {
+  const ranked = triagePilots(pilots);
+  const funded = ranked.filter((pilot) => pilot.decision === "fund");
+  const deferred = ranked.filter((pilot) => pilot.decision === "defer");
+  const killed = ranked.filter((pilot) => pilot.decision === "kill");
+  const top = ranked[0];
+  return {
+    ranked,
+    headline: top ? `${top.name} is the strongest candidate for executive sponsorship.` : "No pilots submitted.",
+    capitalPosture:
+      funded.length > 1
+        ? "Fund selectively; multiple candidates are competing for integration capacity."
+        : funded.length === 1
+          ? "Fund one pilot and protect the implementation path."
+          : "Do not expand spend until the portfolio produces stronger evidence.",
+    boardQuestions: [
+      "Which pilot changes a P&L line or board-level risk?",
+      "Which initiative has a named business owner?",
+      "Which pilot needs integration funding before it can scale?",
+      "Which experiment should be stopped to free capacity?"
+    ],
+    summary: `${funded.length} fund, ${deferred.length} defer, ${ranked.filter((pilot) => pilot.decision === "merge").length} merge, ${killed.length} kill`
+  };
 }
 
 export function analyzeAgentFailure(scenario) {
@@ -60,6 +93,25 @@ export function simulateServiceQueue({ demandPerHour, agents, minutesPerCase, ai
   const backlog = Math.max(0, Math.ceil(arrivals - completions));
   const utilization = Math.min(100, Math.round((arrivals * effectiveMinutes / staffMinutes) * 100));
   return { arrivals, completions, backlog, utilization, effectiveMinutes: Number(effectiveMinutes.toFixed(1)) };
+}
+
+export function buildCapacityPlan(input) {
+  const current = simulateServiceQueue({ ...input, aiAssistPercent: 0, reviewPercent: 0 });
+  const assisted = simulateServiceQueue(input);
+  const backlogChange = current.backlog - assisted.backlog;
+  const recommendation =
+    assisted.backlog === 0
+      ? "Convert the AI gain into a service-level commitment or demand capture plan."
+      : backlogChange > 0
+        ? "AI helps, but the queue still needs routing, staffing, or SLA redesign."
+        : "Do not claim capacity gain; review load or demand pressure is consuming the benefit.";
+  const executivePlan = [
+    `Baseline backlog: ${current.backlog}`,
+    `AI-assisted backlog: ${assisted.backlog}`,
+    `Effective minutes per case: ${assisted.effectiveMinutes}`,
+    recommendation
+  ];
+  return { current, assisted, backlogChange, recommendation, executivePlan };
 }
 
 export function gateAiRelease(checks) {

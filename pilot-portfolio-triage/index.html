@@ -3,47 +3,86 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pilot Portfolio Triage Board</title>
+    <title>AI Investment Committee Simulator</title>
     <link rel="stylesheet" href="/assets/base.css">
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
     <header class="topbar">
-      <div><strong>Pilot Portfolio Triage Board</strong><span>Scale, continue, narrow, or stop</span></div>
-      <a class="back-link" href="/">All projects</a>
+      <div><strong>AI Investment Committee Simulator</strong><span>Board packet for pilot funding decisions</span></div>
     </header>
-    <main class="board">
-      <h1>AI pilots should compete for scale like investments.</h1>
-      <p>This board triages pilots by evidence, adoption, workflow fit, operational risk, integration debt, and uncertainty.</p>
-      <section class="columns" id="columns" aria-label="Pilot decisions"></section>
+    <main class="committee">
+      <section class="briefing">
+        <p class="eyebrow">CEO / CFO / CIO review</p>
+        <h1>Turn scattered AI pilots into a capital allocation decision.</h1>
+        <p>Each initiative is scored for strategic value, evidence, adoption, workflow fit, risk, integration debt, uncertainty, and change cost. The output is an investment memo, not a demo board.</p>
+      </section>
+      <section class="packet">
+        <aside class="docket" aria-label="AI pilot docket">
+          <h2>Pilot docket</h2>
+          <div id="pilot-list"></div>
+        </aside>
+        <section class="memo" aria-label="Investment memo">
+          <div class="memo-head">
+            <span>Investment committee memo</span>
+            <strong id="memo-summary"></strong>
+          </div>
+          <h2 id="memo-headline"></h2>
+          <p id="capital-posture"></p>
+          <div class="ranked" id="ranked"></div>
+          <div class="questions">
+            <h3>Board questions</h3>
+            <ol id="questions"></ol>
+          </div>
+        </section>
+      </section>
     </main>
     <script type="module">
-      import { triagePilots } from "/assets/project-logic.mjs";
+      import { buildInvestmentMemo } from "/assets/project-logic.mjs";
 
       const pilots = [
-        { name: "Claims summary copilot", summary: "Strong usage, measurable handle-time reduction, moderate integration drag.", valueEvidence: 85, adoption: 78, workflowFit: 80, risk: 22, integrationDebt: 35, uncertainty: 18 },
-        { name: "Executive deck generator", summary: "Popular demo, weak baseline, hard-to-measure business outcome.", valueEvidence: 30, adoption: 70, workflowFit: 34, risk: 20, integrationDebt: 18, uncertainty: 55 },
-        { name: "Invoice exception assistant", summary: "Clear cost pool and good workflow fit, but approval controls are unfinished.", valueEvidence: 76, adoption: 58, workflowFit: 88, risk: 45, integrationDebt: 42, uncertainty: 22 },
-        { name: "Customer churn explainer", summary: "Useful analysis, but source data trust and owner action path remain weak.", valueEvidence: 62, adoption: 45, workflowFit: 55, risk: 35, integrationDebt: 38, uncertainty: 40 },
-        { name: "Meeting transcript archive", summary: "Lots of usage, little evidence of operational value.", valueEvidence: 22, adoption: 88, workflowFit: 20, risk: 18, integrationDebt: 20, uncertainty: 48 }
+        { name: "Invoice exception controls", owner: "Finance operations", valueEvidence: 90, adoption: 74, workflowFit: 88, strategicValue: 82, risk: 28, integrationDebt: 34, uncertainty: 18, changeCost: 22 },
+        { name: "Customer service knowledge copilot", owner: "CX", valueEvidence: 72, adoption: 83, workflowFit: 70, strategicValue: 58, risk: 26, integrationDebt: 42, uncertainty: 24, changeCost: 28 },
+        { name: "Executive deck generator", owner: "Strategy", valueEvidence: 22, adoption: 76, workflowFit: 28, strategicValue: 30, risk: 18, integrationDebt: 16, uncertainty: 62, changeCost: 20 },
+        { name: "Vendor risk summarizer", owner: "Procurement", valueEvidence: 64, adoption: 48, workflowFit: 76, strategicValue: 74, risk: 54, integrationDebt: 46, uncertainty: 31, changeCost: 34 }
       ];
 
-      const labels = { scale: "Scale", continue: "Continue", narrow: "Narrow", stop: "Stop" };
-      const grouped = Object.fromEntries(Object.keys(labels).map((key) => [key, []]));
-      for (const pilot of triagePilots(pilots)) grouped[pilot.decision].push(pilot);
+      function renderPilotEditor() {
+        document.querySelector("#pilot-list").innerHTML = pilots.map((pilot, index) => `
+          <article class="pilot-form">
+            <strong>${pilot.name}</strong>
+            <span>${pilot.owner}</span>
+            ${["strategicValue", "valueEvidence", "adoption", "workflowFit", "risk", "integrationDebt", "uncertainty", "changeCost"].map((key) => `
+              <label>${key.replace(/([A-Z])/g, " $1")}<input type="number" min="0" max="100" value="${pilot[key]}" data-index="${index}" data-key="${key}"></label>
+            `).join("")}
+          </article>
+        `).join("");
+      }
 
-      document.querySelector("#columns").innerHTML = Object.entries(labels).map(([key, label]) => `
-        <section class="column">
-          <h2>${label}</h2>
-          ${grouped[key].map((pilot) => `
-            <article class="pilot" data-decision="${key}">
-              <strong>${pilot.name}</strong>
-              <p>${pilot.summary}</p>
-              <div class="score"><span>portfolio score</span><span>${pilot.score}</span></div>
-            </article>
-          `).join("")}
-        </section>
-      `).join("");
+      function renderMemo() {
+        const memo = buildInvestmentMemo(pilots);
+        document.querySelector("#memo-summary").textContent = memo.summary;
+        document.querySelector("#memo-headline").textContent = memo.headline;
+        document.querySelector("#capital-posture").textContent = memo.capitalPosture;
+        document.querySelector("#ranked").innerHTML = memo.ranked.map((pilot, index) => `
+          <article class="rank-card" data-decision="${pilot.decision}">
+            <div><span>#${index + 1} ${pilot.decision}</span><strong>${pilot.name}</strong></div>
+            <p>${pilot.memo}</p>
+            <b>${pilot.score}</b>
+          </article>
+        `).join("");
+        document.querySelector("#questions").innerHTML = memo.boardQuestions.map((question) => `<li>${question}</li>`).join("");
+      }
+
+      renderPilotEditor();
+      renderMemo();
+      document.querySelector("#pilot-list").addEventListener("input", (event) => {
+        const { index, key } = event.target.dataset;
+        if (index && key) {
+          pilots[Number(index)][key] = Number(event.target.value);
+          renderMemo();
+        }
+      });
     </script>
   </body>
 </html>

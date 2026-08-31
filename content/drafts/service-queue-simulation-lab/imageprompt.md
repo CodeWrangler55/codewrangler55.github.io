@@ -2,8 +2,8 @@
 
 ## Keyframe 1
 
-A humanoid robot service analyst stands beside a busy customer operations queue with glowing tickets piling up, human agents working cases, and AI assistance speeding individual tasks while backlog remains visible; realistic operations floor, no readable text, no logos, 16:9.
+A humanoid robot operations chief stands in an AI capacity war room with three department scenarios on large tactical displays: customer support, finance exceptions, and onboarding review; backlog, staffing, review burden, and throughput are shown as visual flows, realistic executive operations setting, no readable text, no logos, 16:9.
 
 ## Keyframe 2
 
-The humanoid robot reorganizes the queue into faster service lanes with completed tickets flowing out, review stations clearly separated, and backlog shrinking; bright operational simulation aesthetic, clean teal and green accents, no readable text, no logos, 16:9.
+The humanoid robot points to an executive capacity plan while one queue shrinks, one remains overloaded, and one is rerouted through human review; the scene shows saved AI minutes becoming an operating decision, cinematic war-room lighting, no readable text, no logos, 16:9.

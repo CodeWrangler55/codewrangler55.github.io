@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   analyzeAgentFailure,
+  buildCapacityPlan,
   buildExceptionTaxonomy,
+  buildInvestmentMemo,
   gateAiRelease,
   simulateServiceQueue,
   triagePilots
@@ -24,7 +26,15 @@ describe("pilot portfolio triage", () => {
       { name: "strong", valueEvidence: 90, adoption: 85, workflowFit: 80, risk: 20, integrationDebt: 20, uncertainty: 10 }
     ]);
     assert.equal(first.name, "strong");
-    assert.equal(first.decision, "scale");
+    assert.equal(first.decision, "fund");
+  });
+
+  it("produces a board-level memo posture", () => {
+    const memo = buildInvestmentMemo([
+      { name: "invoice control", valueEvidence: 90, adoption: 80, workflowFit: 88, strategicValue: 80, risk: 25, integrationDebt: 20, uncertainty: 12, changeCost: 20 }
+    ]);
+    assert.equal(memo.capitalPosture, "Fund one pilot and protect the implementation path.");
+    assert.match(memo.headline, /invoice control/);
   });
 });
 
@@ -41,6 +51,12 @@ describe("service queue simulation", () => {
     const result = simulateServiceQueue({ demandPerHour: 30, agents: 3, minutesPerCase: 12, aiAssistPercent: 30, reviewPercent: 20, hours: 8 });
     assert.equal(result.arrivals, 240);
     assert.ok(result.backlog > 0);
+  });
+
+  it("turns queue math into an executive capacity plan", () => {
+    const plan = buildCapacityPlan({ demandPerHour: 20, agents: 4, minutesPerCase: 10, aiAssistPercent: 40, reviewPercent: 10, hours: 8 });
+    assert.ok(plan.assisted.completions > plan.current.completions);
+    assert.equal(plan.executivePlan.length, 4);
   });
 });
 

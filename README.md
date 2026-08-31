@@ -5,9 +5,9 @@ Static applied-AI business projects and WordPress draft support files.
 ## Demos
 
 - `/exception-taxonomy-builder/`
-- `/pilot-portfolio-triage/`
+- `/pilot-portfolio-triage/` - AI Investment Committee Simulator
 - `/agent-failure-mode-lab/`
-- `/service-queue-simulation-lab/`
+- `/service-queue-simulation-lab/` - AI Capacity Conversion War Room
 - `/ai-trust-release-gate/`
 
 ## Content

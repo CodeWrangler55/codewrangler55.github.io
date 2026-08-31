@@ -6,11 +6,11 @@ Bill Gates has described the near-term value of AI as helping people do their jo
 
 ## The project
 
-I built a [Service Queue Simulation Lab](https://codewrangler55.github.io/service-queue-simulation-lab/) for this problem.
+I rebuilt this as an [AI Capacity Conversion War Room](https://codewrangler55.github.io/service-queue-simulation-lab/) for this problem.
 
-The simulation uses demand per hour, staffing, minutes per case, AI assistance, review load, and operating hours. It shows arrivals, completed work, backlog, and utilization.
+The tool lets a leader choose a real operating scenario, then compare baseline backlog against AI-assisted backlog. It uses demand, staffing, case time, AI assistance, review burden, and operating hours to generate an executive capacity plan.
 
-This is more useful than a productivity claim because it forces the operational question: did the saved time move the queue?
+This is more useful than a productivity claim because it forces the operating question: did the saved time move the queue, or did review burden and demand pressure eat the gain?
 
 ## Why this matters
 
@@ -18,4 +18,4 @@ A team can save minutes inside a task while the backlog still grows. That can ha
 
 The model does not decide what saved time becomes. Leaders do.
 
-Saved time can become faster service, more throughput, lower overtime, better quality control, or nothing measurable. The difference is operating design.
+Saved time can become faster service, more throughput, lower overtime, better quality control, or nothing measurable. The difference is operating design, and that is a CEO-level question.
