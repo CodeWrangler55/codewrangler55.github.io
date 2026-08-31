@@ -1,0 +1,13 @@
+{
+  "name": "codewrangler55-github-pages",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "download:posts": "node scripts/download-posts.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm test",
+    "serve": "npx http-server . -p 4177 -c-1"
+  },
+  "devDependencies": {}
+}

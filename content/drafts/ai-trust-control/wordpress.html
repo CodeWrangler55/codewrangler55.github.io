@@ -1,0 +1,24 @@
+<!-- wp:heading {"level":1} --><h1>Trust Is a Product Requirement, Not an AI Policy</h1><!-- /wp:heading -->
+<!-- wp:paragraph --><p>AI governance often gets discussed like it is a document.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Policies matter. But a policy that lives outside the product does not control much by itself.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>If an AI system is making recommendations inside a business workflow, trust has to be designed into the product. The controls need to show up in the interface, the logs, the routing rules, the tests, and the release gate.</p><!-- /wp:paragraph -->
+<!-- wp:quote --><blockquote class="wp-block-quote"><p>Fei-Fei Li describes AI as a tool "to augment us."</p><cite><a href="https://www.atlassian.com/blog/leadership/fei-fei-li-on-humanity-and-ai">Atlassian</a></cite></blockquote><!-- /wp:quote -->
+<!-- wp:paragraph --><p>That is the right posture. Augmentation still needs boundaries. It needs evidence. It needs a way to keep people from harm's way when the system is uncertain or the stakes are high.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>The project</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>I built an <a href="https://codewrangler55.github.io/ai-trust-control/">AI Trust Control</a> demo to model a release gate for an AI feature.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The tool scores policy coverage, citation rate, PII exposure risk, human override rate, and prompt injection test pass rate. The output is a release recommendation: limited production, supervised pilot, or do not release.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>This is not a substitute for real governance. It is a product-thinking sketch of what governance has to become.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Why policy is not enough</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>An AI policy can say the system should not expose sensitive data. The product still needs controls that prevent it.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>An AI policy can say answers should be explainable. The product still needs citations, source links, and an audit record.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>An AI policy can say humans should approve high-risk decisions. The product still needs routing rules, thresholds, and escalation paths.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That is where implementation matters.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The controls have to be measurable. If the system cites evidence 52 percent of the time, that is not a philosophy problem. That is a release problem. If prompt injection tests keep passing bad instructions through, that is not a training issue to discuss later. That is a product risk now.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>The implementation shape</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>For a real AI workflow, I would want the trust layer separated from the prompt: policy rules outside the model, role-based access checks, citations tied to source records, confidence and abstention behavior, approval thresholds, PII filtering, injection tests, and drift monitoring.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That structure gives the business something better than reassurance. It gives the business evidence.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>What executives should ask</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The executive question should not be, "Is this AI trustworthy?" That is too vague.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Better questions are: What can the system do without approval? What evidence does it show? What data can it access? What happens when it is uncertain? How do we test abuse cases? How do we know humans are overriding it?</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Those questions turn trust from a slogan into product requirements.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That is the direction I think serious AI implementation has to go. Trust cannot remain a slide at the end of the strategy deck. It has to be built into the workflow.</p><!-- /wp:paragraph -->
