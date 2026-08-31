@@ -12,6 +12,10 @@ The tool reviews pilots by strategic value, value evidence, adoption, workflow f
 
 That is closer to how executives actually manage investment decisions. A CFO does not need five disconnected demos. A CIO does not need a pile of experiments with no integration plan. The CEO needs to know what to fund, defer, merge, or kill.
 
+## GitHub reference
+
+The GitHub project that fits this post best is [ai-kaizen](https://github.com/KevinCrosby/ai-kaizen). It tracks AI initiatives with metadata, outcomes, eval pass rates, gate status, data readiness, ROI summary, value tracking, and an A3 one-pager. That is exactly the signal this article needs: AI pilots should be managed as a value portfolio, not as scattered experiments.
+
 ## Why this matters
 
 The hard question is not whether someone enjoyed the tool. The hard question is whether the pilot has earned the next dollar, the next integration, and the next organizational change.

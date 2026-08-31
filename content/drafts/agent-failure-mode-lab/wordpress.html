@@ -6,6 +6,8 @@
 <!-- wp:paragraph --><p>I built an <a href="https://codewrangler55.github.io/agent-failure-mode-lab/">Agent Failure Mode Lab</a>.</p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>The lab stress tests an agent action before it reaches a workflow. It checks for missing evidence, conflicting policy, permission mismatch, stale data, and excessive dollar risk. If those controls fail, the agent is blocked before action.</p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>That is the product lesson. The verifier is not decoration. It is the system boundary.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>GitHub reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The repo to study here is <a href="https://github.com/ethz-spylab/agentdojo">AgentDojo</a>. It evaluates prompt-injection attacks and defenses for tool-using agents across realistic tasks. That maps directly to this post because the business risk is not just bad text. It is an agent using tools, reading untrusted data, and taking an unsafe action unless the system catches it first.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2>Why this matters</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Most AI pilots look better before they are connected to production systems. Once the agent can act, all the old operational questions come back: evidence, policy, authority, data freshness, and risk.</p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>That is where agentic AI becomes serious. The model proposes. The system verifies. Humans approve what should not be automated.</p><!-- /wp:paragraph -->

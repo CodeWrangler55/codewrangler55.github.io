@@ -12,6 +12,10 @@ The tool lets a leader choose a real operating scenario, then compare baseline b
 
 This is more useful than a productivity claim because it forces the operating question: did the saved time move the queue, or did review burden and demand pressure eat the gain?
 
+## GitHub reference
+
+The best GitHub reference for this article is Michelin's [Throughput Strategy Game](https://github.com/michelin/Throughput-Strategy-Game). It is about maximizing finished work while limiting work in progress. That matters because AI productivity claims often focus on task speed, while executives care about flow: WIP, bottlenecks, throughput, and whether the system actually finishes more work.
+
 ## Why this matters
 
 A team can save minutes inside a task while the backlog still grows. That can happen when demand is too high, review burden eats the savings, staffing is constrained, or management never redeploys the freed capacity.

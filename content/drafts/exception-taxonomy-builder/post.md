@@ -18,6 +18,10 @@ It takes messy operational edge cases and groups them into categories like missi
 
 That is the work before automation. Most workflows do not fail on the happy path. They fail where the invoice is missing, the policy is unclear, the ERP and CRM disagree, or the customer is too important for normal routing.
 
+## GitHub reference
+
+The GitHub project I would point readers to is [PM4Py](https://github.com/process-intelligence-solutions/pm4py), an open-source Python process-mining library. It is relevant because it starts from event logs and discovers how work actually moves through a process. That is the grown-up version of the same idea: before AI redesigns a workflow, the company needs evidence about the real path, the bottlenecks, and the exceptions.
+
 ## Why this matters
 
 AI strategy gets vague fast. Exception handling makes it concrete.

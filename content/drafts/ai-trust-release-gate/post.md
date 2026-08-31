@@ -12,6 +12,10 @@ It checks whether the AI feature has policy tests, mandatory citations, a proven
 
 That is the right level for executives. The CFO sees risk, auditability, and exposure. The CIO sees production readiness, security, and architecture controls.
 
+## GitHub reference
+
+The strongest repo match is Google's [Cybernetic Agent Governance Engine](https://github.com/google/cybernetic-agent-governance-engine). CAGE is relevant because it treats agent governance as runtime enforcement, not a policy PDF. That is the core point of this post: trust has to be implemented as checks around model calls, tool use, evidence, policy, and auditability.
+
 ## Why this matters
 
 Trust is not a sentence at the end of an AI strategy deck. It has to become part of the product.
