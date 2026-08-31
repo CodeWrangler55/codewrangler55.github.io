@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Service Queue Simulation Lab</title>
+    <link rel="stylesheet" href="/assets/base.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div><strong>Service Queue Simulation Lab</strong><span>Productivity must become capacity</span></div>
+      <a class="back-link" href="/">All projects</a>
+    </header>
+    <main class="sim">
+      <h1>Watch AI assistance move, or fail to move, the service queue.</h1>
+      <section class="controls">
+        <label>Demand/hr<input id="demandPerHour" type="number" value="30"></label>
+        <label>Agents<input id="agents" type="number" value="3"></label>
+        <label>Minutes/case<input id="minutesPerCase" type="number" value="12"></label>
+        <label>AI assist %<input id="aiAssistPercent" type="number" value="30"></label>
+        <label>Review %<input id="reviewPercent" type="number" value="20"></label>
+        <label>Hours<input id="hours" type="number" value="8"></label>
+        <button id="run">Simulate</button>
+      </section>
+      <section class="floor">
+        <article class="station"><h2>Demand queue</h2><div class="queue" id="arrivals"></div></article>
+        <article class="station"><h2>Completed work</h2><div class="queue" id="completions"></div></article>
+      </section>
+      <section class="stats" id="stats"></section>
+    </main>
+    <script type="module">
+      import { simulateServiceQueue } from "/assets/project-logic.mjs";
+
+      function bars(count, className) {
+        const visible = Math.min(40, Math.max(1, Math.round(count / 8)));
+        return Array.from({ length: visible }, () => `<div class="ticket ${className}"></div>`).join("");
+      }
+
+      function render() {
+        const input = Object.fromEntries(["demandPerHour", "agents", "minutesPerCase", "aiAssistPercent", "reviewPercent", "hours"].map((id) => [id, Number(document.querySelector(`#${id}`).value)]));
+        const result = simulateServiceQueue(input);
+        document.querySelector("#arrivals").innerHTML = bars(result.arrivals, result.backlog ? "waiting" : "");
+        document.querySelector("#completions").innerHTML = bars(result.completions, "done");
+        document.querySelector("#stats").innerHTML = [
+          ["arrivals", result.arrivals],
+          ["completed", result.completions],
+          ["backlog", result.backlog],
+          ["utilization", `${result.utilization}%`]
+        ].map(([label, value]) => `<article class="stat"><span>${label}</span><strong>${value}</strong></article>`).join("");
+      }
+
+      document.querySelector("#run").addEventListener("click", render);
+      render();
+    </script>
+  </body>
+</html>

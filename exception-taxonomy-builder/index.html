@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exception Taxonomy Builder</title>
+    <link rel="stylesheet" href="/assets/base.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div><strong>Exception Taxonomy Builder</strong><span>Case files before automation</span></div>
+      <a class="back-link" href="/">All projects</a>
+    </header>
+    <main class="dossier">
+      <section class="intake">
+        <h1>Sort the cases before the model touches the workflow.</h1>
+        <p>Paste one exception per line. The builder groups them into operational classes with risk, authority, and implementation rules.</p>
+        <textarea id="cases">Missing invoice record for customer renewal
+CRM status mismatch after ERP sync
+Refund amount requires approval but policy is unclear
+Strategic account escalated because shipment status is unknown
+Duplicate customer record created after sync</textarea>
+        <button id="build">Build taxonomy</button>
+      </section>
+      <section class="output">
+        <div class="taxonomy-grid" id="taxonomy"></div>
+      </section>
+    </main>
+    <script type="module">
+      import { buildExceptionTaxonomy } from "/assets/project-logic.mjs";
+
+      const textarea = document.querySelector("#cases");
+      const output = document.querySelector("#taxonomy");
+
+      function render() {
+        const cases = textarea.value.split(/\n+/).map((line) => line.trim());
+        const taxonomy = buildExceptionTaxonomy(cases);
+        output.innerHTML = taxonomy.map((item) => `
+          <article class="folder">
+            <h2>${item.type}</h2>
+            <div class="tags"><span class="tag">risk: ${item.risk}</span><span class="tag">owner: ${item.authority}</span><span class="tag">${item.count} case${item.count === 1 ? "" : "s"}</span></div>
+            <p>Implementation rule: route ${item.type} cases to ${item.authority} before any AI-assisted system write.</p>
+            <ul class="examples">${item.examples.slice(0, 3).map((example) => `<li>${example}</li>`).join("")}</ul>
+          </article>
+        `).join("");
+      }
+
+      document.querySelector("#build").addEventListener("click", render);
+      render();
+    </script>
+  </body>
+</html>

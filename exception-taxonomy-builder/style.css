@@ -1,0 +1,124 @@
+:root {
+  --bg: #f2efe6;
+  --ink: #1f2a2d;
+  --muted: #68706f;
+  --rule: #26383b;
+  --stamp: #b24a2f;
+  --paper: #fffdf6;
+  --topbar-bg: #efe8d8;
+  --topbar-border: 3px double #26383b;
+  --button-border: 2px solid #26383b;
+}
+
+.dossier {
+  display: grid;
+  grid-template-columns: minmax(300px, 430px) minmax(0, 1fr);
+  gap: 0;
+  min-height: calc(100vh - 73px);
+}
+
+.intake {
+  padding: 28px;
+  background: #e8dfcb;
+  border-right: 3px double var(--rule);
+}
+
+.intake h1 {
+  margin: 0 0 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 36px;
+  line-height: 1;
+}
+
+.intake p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 14px;
+  border: 2px solid var(--rule);
+  border-radius: 0;
+  background: var(--paper);
+  line-height: 1.45;
+}
+
+button {
+  margin-top: 12px;
+  width: 100%;
+  border: 2px solid var(--rule);
+  border-radius: 0;
+  padding: 12px 14px;
+  background: var(--rule);
+  color: #fffdf6;
+  font-weight: 800;
+}
+
+.output {
+  padding: clamp(22px, 4vw, 46px);
+}
+
+.taxonomy-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.folder {
+  position: relative;
+  padding: 18px;
+  border: 2px solid var(--rule);
+  background: var(--paper);
+  box-shadow: 12px 12px 0 rgba(31, 42, 45, 0.12);
+}
+
+.folder::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  width: 110px;
+  height: 14px;
+  border: 2px solid var(--rule);
+  border-bottom: 0;
+  background: var(--paper);
+}
+
+.folder h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.tag {
+  border: 1px solid var(--stamp);
+  color: var(--stamp);
+  padding: 4px 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.examples {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .dossier {
+    grid-template-columns: 1fr;
+  }
+
+  .intake {
+    border-right: 0;
+    border-bottom: 3px double var(--rule);
+  }
+}

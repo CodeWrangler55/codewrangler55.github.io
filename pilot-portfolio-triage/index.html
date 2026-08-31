@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pilot Portfolio Triage Board</title>
+    <link rel="stylesheet" href="/assets/base.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div><strong>Pilot Portfolio Triage Board</strong><span>Scale, continue, narrow, or stop</span></div>
+      <a class="back-link" href="/">All projects</a>
+    </header>
+    <main class="board">
+      <h1>AI pilots should compete for scale like investments.</h1>
+      <p>This board triages pilots by evidence, adoption, workflow fit, operational risk, integration debt, and uncertainty.</p>
+      <section class="columns" id="columns" aria-label="Pilot decisions"></section>
+    </main>
+    <script type="module">
+      import { triagePilots } from "/assets/project-logic.mjs";
+
+      const pilots = [
+        { name: "Claims summary copilot", summary: "Strong usage, measurable handle-time reduction, moderate integration drag.", valueEvidence: 85, adoption: 78, workflowFit: 80, risk: 22, integrationDebt: 35, uncertainty: 18 },
+        { name: "Executive deck generator", summary: "Popular demo, weak baseline, hard-to-measure business outcome.", valueEvidence: 30, adoption: 70, workflowFit: 34, risk: 20, integrationDebt: 18, uncertainty: 55 },
+        { name: "Invoice exception assistant", summary: "Clear cost pool and good workflow fit, but approval controls are unfinished.", valueEvidence: 76, adoption: 58, workflowFit: 88, risk: 45, integrationDebt: 42, uncertainty: 22 },
+        { name: "Customer churn explainer", summary: "Useful analysis, but source data trust and owner action path remain weak.", valueEvidence: 62, adoption: 45, workflowFit: 55, risk: 35, integrationDebt: 38, uncertainty: 40 },
+        { name: "Meeting transcript archive", summary: "Lots of usage, little evidence of operational value.", valueEvidence: 22, adoption: 88, workflowFit: 20, risk: 18, integrationDebt: 20, uncertainty: 48 }
+      ];
+
+      const labels = { scale: "Scale", continue: "Continue", narrow: "Narrow", stop: "Stop" };
+      const grouped = Object.fromEntries(Object.keys(labels).map((key) => [key, []]));
+      for (const pilot of triagePilots(pilots)) grouped[pilot.decision].push(pilot);
+
+      document.querySelector("#columns").innerHTML = Object.entries(labels).map(([key, label]) => `
+        <section class="column">
+          <h2>${label}</h2>
+          ${grouped[key].map((pilot) => `
+            <article class="pilot" data-decision="${key}">
+              <strong>${pilot.name}</strong>
+              <p>${pilot.summary}</p>
+              <div class="score"><span>portfolio score</span><span>${pilot.score}</span></div>
+            </article>
+          `).join("")}
+        </section>
+      `).join("");
+    </script>
+  </body>
+</html>

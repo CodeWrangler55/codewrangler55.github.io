@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Failure Mode Lab</title>
+    <link rel="stylesheet" href="/assets/base.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div><strong>Agent Failure Mode Lab</strong><span>Break the agent before production does</span></div>
+      <a class="back-link" href="/">All projects</a>
+    </header>
+    <main class="lab">
+      <section class="scenario">
+        <h1>Run pre-action failure checks.</h1>
+        <p>An agent wants to issue an operational action. Toggle the production facts and see which controls block it.</p>
+        <div class="switches">
+          <label><input id="hasEvidence" type="checkbox" checked> Source evidence is present</label>
+          <label><input id="policyConflict" type="checkbox" checked> Policy conflict exists</label>
+          <label><input id="hasPermission" type="checkbox"> Agent has write permission</label>
+        </div>
+        <input id="dataAgeDays" type="number" min="0" value="12" aria-label="Data age in days">
+        <input id="dollarRisk" type="number" min="0" value="3400" aria-label="Dollar risk">
+        <button id="run">Run lab</button>
+      </section>
+      <section class="bench">
+        <div class="status"><h2 id="status"></h2><p id="summary"></p></div>
+        <div class="failures" id="failures"></div>
+      </section>
+    </main>
+    <script type="module">
+      import { analyzeAgentFailure } from "/assets/project-logic.mjs";
+
+      function render() {
+        const result = analyzeAgentFailure({
+          hasEvidence: document.querySelector("#hasEvidence").checked,
+          policyConflict: document.querySelector("#policyConflict").checked,
+          hasPermission: document.querySelector("#hasPermission").checked,
+          dataAgeDays: Number(document.querySelector("#dataAgeDays").value),
+          dollarRisk: Number(document.querySelector("#dollarRisk").value)
+        });
+        document.querySelector("#status").textContent = result.status;
+        document.querySelector("#summary").textContent = result.failures.length ? `${result.failures.length} failure mode(s) must be controlled before action.` : "The action can proceed with audit logging.";
+        const all = [
+          "missing evidence",
+          "conflicting policy",
+          "permission mismatch",
+          "stale data",
+          "excessive action risk"
+        ];
+        document.querySelector("#failures").innerHTML = all.map((label) => {
+          const failure = result.failures.find((item) => item.label === label);
+          return `<article class="failure ${failure ? "failed" : ""}"><strong>${label}</strong><p>${failure ? failure.control : "No blocker detected for this control."}</p></article>`;
+        }).join("");
+      }
+
+      document.querySelector("#run").addEventListener("click", render);
+      render();
+    </script>
+  </body>
+</html>

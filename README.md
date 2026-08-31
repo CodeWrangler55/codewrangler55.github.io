@@ -1,14 +1,14 @@
 # CodeWrangler55 GitHub Pages
 
-Static applied-AI business demos and WordPress draft support files.
+Static applied-AI business projects and WordPress draft support files.
 
 ## Demos
 
-- `/ai-workflow-readiness/`
-- `/ai-value-ledger/`
-- `/workflow-edge-agent/`
-- `/ai-capacity-simulator/`
-- `/ai-trust-control/`
+- `/exception-taxonomy-builder/`
+- `/pilot-portfolio-triage/`
+- `/agent-failure-mode-lab/`
+- `/service-queue-simulation-lab/`
+- `/ai-trust-release-gate/`
 
 ## Content
 

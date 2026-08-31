@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Trust Release Gate</title>
+    <link rel="stylesheet" href="/assets/base.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div><strong>AI Trust Release Gate</strong><span>Governance as production control</span></div>
+      <a class="back-link" href="/">All projects</a>
+    </header>
+    <main class="gate">
+      <section class="brief">
+        <h1>Do not ship trust as a paragraph.</h1>
+        <p>Use this gate to decide whether an AI feature can enter limited production, remain supervised, or stay out of production.</p>
+        <div class="checks">
+          <label><input id="policyTests" type="checkbox" checked> Policy tests exist</label>
+          <label><input id="citations" type="checkbox" checked> Citations are mandatory</label>
+          <label><input id="piiBoundary" type="checkbox"> PII boundary is proven</label>
+          <label><input id="injectionTests" type="checkbox"> Prompt injection tests pass</label>
+          <label><input id="auditTrail" type="checkbox" checked> Audit trail is complete</label>
+          <label><input id="rollback" type="checkbox" checked> Rollback plan exists</label>
+        </div>
+        <button id="review">Review release</button>
+      </section>
+      <section class="decision">
+        <div class="seal"><span>Release decision</span><strong id="decision"></strong></div>
+        <div class="blockers" id="blockers"></div>
+      </section>
+    </main>
+    <script type="module">
+      import { gateAiRelease } from "/assets/project-logic.mjs";
+
+      const ids = ["policyTests", "citations", "piiBoundary", "injectionTests", "auditTrail", "rollback"];
+      function render() {
+        const checks = Object.fromEntries(ids.map((id) => [id, document.querySelector(`#${id}`).checked]));
+        const result = gateAiRelease(checks);
+        document.querySelector("#decision").textContent = result.decision;
+        document.querySelector("#blockers").innerHTML = ids.map((id) => {
+          const label = document.querySelector(`label:has(#${id})`).innerText.trim();
+          const blocked = result.blockers.some((blocker) => blocker.toLowerCase().includes(label.split(" ")[0].toLowerCase()));
+          return `<article class="blocker ${checks[id] ? "ok" : ""}"><strong>${label}</strong><p>${checks[id] ? "Evidence present for release review." : "Missing control evidence."}</p><span>${blocked ? "blocker" : "control"}</span></article>`;
+        }).join("");
+      }
+
+      document.querySelector("#review").addEventListener("click", render);
+      render();
+    </script>
+  </body>
+</html>
