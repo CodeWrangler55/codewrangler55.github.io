@@ -1,14 +1,15 @@
 <!-- wp:heading {"level":1} --><h1>Trust Is a Product Requirement, Not an AI Policy</h1><!-- /wp:heading -->
 <!-- wp:paragraph --><p>AI governance cannot live only in a document.</p><!-- /wp:paragraph -->
-<!-- wp:quote --><blockquote class="wp-block-quote"><p>Fei-Fei Li describes AI as a tool "to augment us."</p><cite><a href="https://www.atlassian.com/blog/leadership/fei-fei-li-on-humanity-and-ai">Atlassian</a></cite></blockquote><!-- /wp:quote -->
-<!-- wp:paragraph --><p>I agree with that framing. But augmentation inside a business workflow still needs controls.</p><!-- /wp:paragraph -->
-<!-- wp:heading --><h2>The project</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>I built an <a href="https://codewrangler55.github.io/ai-trust-release-gate/">AI Trust Release Gate</a> for a CFO and CIO audience.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>It checks whether the AI feature has policy tests, mandatory citations, a proven PII boundary, prompt injection testing, a complete audit trail, and a rollback plan. The output is a release decision: limited production, supervised pilot only, or do not release.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>That is the right level for executives. The CFO sees risk, auditability, and exposure. The CIO sees production readiness, security, and architecture controls.</p><!-- /wp:paragraph -->
-<!-- wp:heading --><h2>GitHub reference</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>The strongest repo match is Google's <a href="https://github.com/google/cybernetic-agent-governance-engine">Cybernetic Agent Governance Engine</a>. CAGE is relevant because it treats agent governance as runtime enforcement, not a policy PDF. That is the core point of this post: trust has to be implemented as checks around model calls, tool use, evidence, policy, and auditability.</p><!-- /wp:paragraph -->
-<!-- wp:heading --><h2>Why this matters</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>Trust is not a sentence at the end of an AI strategy deck. It has to become part of the product.</p><!-- /wp:paragraph -->
+<!-- wp:quote --><blockquote class="wp-block-quote"><p>AI is a tool “to augment us.”</p><cite>Fei-Fei Li, <a href="https://www.atlassian.com/blog/leadership/fei-fei-li-on-humanity-and-ai">Atlassian</a></cite></blockquote><!-- /wp:quote -->
+<!-- wp:paragraph --><p>I agree with that framing. But augmentation inside a business workflow still needs controls that work at runtime.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Trust has to be implemented</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>If citations are optional, the answer is not traceable. If PII boundaries are unproven, the risk is not controlled. If injection tests are missing, the system has not been challenged. If the audit trail is incomplete, the organization cannot explain what happened.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>That is not anti-AI. That is how AI gets safely into production.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Those are product requirements, not just policy statements. They need an owner, a test, a pass or fail result, and a decision about what happens when the control fails.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Governance at the point of action</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Google's <a href="https://github.com/google/cybernetic-agent-governance-engine">Cybernetic Agent Governance Engine</a> is a useful repository to study because it treats agent governance as runtime enforcement rather than a policy PDF.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That is the important shift. Controls need to sit around model calls, tool use, evidence, permissions, policy checks, and auditability. A release decision should reflect whether those controls have been tested, not whether the strategy document sounds responsible.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>For a CFO, this makes exposure and auditability visible. For a CIO, it makes production readiness and architecture controls concrete. For the product team, it creates a definition of done.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Release trust with the feature</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>I want an AI feature to have a clear release posture: limited production, supervised pilot only, or do not release. The posture should change when the evidence changes.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That does not make the organization anti-AI. It makes the organization capable of using AI in consequential work without confusing confidence with control.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Trust is not a sentence at the end of an AI strategy deck. It is part of the product, part of the release process, and part of the operating system that surrounds the model.</p><!-- /wp:paragraph -->

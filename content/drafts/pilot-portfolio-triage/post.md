@@ -4,29 +4,28 @@ A pilot with users is not the same thing as a business system with measurable va
 
 Jensen Huang has described AI as a factory, and that is the right mental model. If AI is part of operations, it needs operating discipline. Usage is not enough.
 
-## The project
+## A pilot is an investment decision
 
-I rebuilt this as an [AI Investment Committee Simulator](https://codewrangler55.github.io/pilot-portfolio-triage/) instead of another ROI calculator.
+The hard question is not whether someone enjoyed the tool. It is whether the pilot has earned the next dollar, the next integration, and the next organizational change.
 
-The tool reviews pilots by strategic value, value evidence, adoption, workflow fit, risk, integration debt, uncertainty, and change cost. Then it produces an investment committee memo with a capital posture, ranked recommendations, and board-level questions.
+That requires a baseline. What changed? Who adopted it? Which workflow did it touch? What risk did it introduce? What system integration is still missing? What decision are we making now?
 
-That is closer to how executives actually manage investment decisions. A CFO does not need five disconnected demos. A CIO does not need a pile of experiments with no integration plan. The CEO needs to know what to fund, defer, merge, or kill.
+I would rather have a small portfolio with explicit decisions than a long list of experiments that all remain “promising.” Some pilots should be funded. Some need more evidence. Some should be merged because they are solving the same problem. Some should be stopped.
 
-## GitHub reference
+## Manage AI like a portfolio
 
-The GitHub project that fits this post best is [ai-kaizen](https://github.com/KevinCrosby/ai-kaizen). It tracks AI initiatives with metadata, outcomes, eval pass rates, gate status, data readiness, ROI summary, value tracking, and an A3 one-pager. That is exactly the signal this article needs: AI pilots should be managed as a value portfolio, not as scattered experiments.
+[ai-kaizen](https://github.com/KevinCrosby/ai-kaizen) is a useful example of the operating discipline this requires. It tracks initiatives with outcomes, evaluation pass rates, gate status, data readiness, ROI summaries, value tracking, and an A3-style one-pager.
 
-## Why this matters
+The important idea is not the particular interface. It is the shift in unit of management. An AI pilot is not a disconnected demo. It is an investment with assumptions, evidence, dependencies, and a decision date.
 
-The hard question is not whether someone enjoyed the tool. The hard question is whether the pilot has earned the next dollar, the next integration, and the next organizational change.
+That changes the conversation between the CFO, CIO, and business owner. The CFO can ask what value has been proven. The CIO can see what integration and control work remains. The business owner can see what adoption and process change are required.
 
-A serious AI pilot should be able to answer:
+## Capital discipline beats pilot theater
 
-- What baseline changed?
-- Who adopted it?
-- What workflow did it touch?
-- What risk did it introduce?
-- What system integration is still missing?
-- What decision are we making now?
+Every pilot consumes more than model tokens. It consumes attention, data engineering, security review, training, change management, and credibility.
 
-That is how pilot theater turns into capital discipline.
+That is why “people like it” is a weak success metric. A serious pilot should show measurable movement against a baseline and make its remaining uncertainty visible.
+
+If the evidence is weak, defer the investment. If the value is real but the workflow is not ready, fix the workflow. If the pilot has earned scale, fund the integration that makes the benefit repeatable.
+
+AI becomes a business capability when leaders can decide what to fund, what to defer, and what to kill.

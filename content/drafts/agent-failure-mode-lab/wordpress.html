@@ -1,13 +1,17 @@
 <!-- wp:heading {"level":1} --><h1>Why Good AI Pilots Die at the Edge of the Workflow</h1><!-- /wp:heading -->
-<!-- wp:quote --><blockquote class="wp-block-quote"><p>Andrej Karpathy: "Usually they are doing the generation, and we as humans are doing the verification."</p><cite><a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ">Software Is Changing (Again)</a></cite></blockquote><!-- /wp:quote -->
+<!-- wp:quote --><blockquote class="wp-block-quote"><p>“Usually they are doing the generation, and we as humans are doing the verification.”</p><cite>Andrej Karpathy, <a href="https://www.youtube.com/watch?v=LCEmiRjPEtQ">Software Is Changing (Again)</a></cite></blockquote><!-- /wp:quote -->
 <!-- wp:paragraph --><p>That is not just a user experience point. It is an architecture point.</p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>The enterprise problem is not whether an agent can produce an answer. The problem is whether the answer survives contact with evidence, policy, permissions, stale data, and financial risk.</p><!-- /wp:paragraph -->
-<!-- wp:heading --><h2>The project</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>I built an <a href="https://codewrangler55.github.io/agent-failure-mode-lab/">Agent Failure Mode Lab</a>.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>The lab stress tests an agent action before it reaches a workflow. It checks for missing evidence, conflicting policy, permission mismatch, stale data, and excessive dollar risk. If those controls fail, the agent is blocked before action.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>That is the product lesson. The verifier is not decoration. It is the system boundary.</p><!-- /wp:paragraph -->
-<!-- wp:heading --><h2>GitHub reference</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>The repo to study here is <a href="https://github.com/ethz-spylab/agentdojo">AgentDojo</a>. It evaluates prompt-injection attacks and defenses for tool-using agents across realistic tasks. That maps directly to this post because the business risk is not just bad text. It is an agent using tools, reading untrusted data, and taking an unsafe action unless the system catches it first.</p><!-- /wp:paragraph -->
-<!-- wp:heading --><h2>Why this matters</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>Most AI pilots look better before they are connected to production systems. Once the agent can act, all the old operational questions come back: evidence, policy, authority, data freshness, and risk.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>The dangerous moment is the handoff</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Most AI pilots look better before they are connected to production systems. The model produces a convincing answer, the user nods, and the demo ends.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The risk begins when the agent can read untrusted data, call a tool, update a system, send a message, or approve something with a dollar value attached. At that point, generation is only half of the system. Verification has to become an explicit control boundary.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The questions are operational:</p><!-- /wp:paragraph -->
+<!-- wp:list --><ul><li>What evidence supports this action?</li><li>Is the policy clear?</li><li>Does this user have authority?</li><li>Is the data fresh enough?</li><li>What happens if the action is wrong?</li></ul><!-- /wp:list -->
+<!-- wp:heading --><h2>Test the agent where it can cause harm</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><a href="https://github.com/ethz-spylab/agentdojo">AgentDojo</a> is a strong example of this kind of testing. It evaluates prompt-injection attacks and defenses for tool-using agents across realistic tasks.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That matters because the business risk is not just bad text. It is an agent reading a malicious instruction in a document, confusing it with a business rule, and then using its permissions to take an unsafe action.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The implementation pattern is straightforward even when the engineering is not: separate proposed actions from executed actions, require evidence, check permissions and policy, measure data freshness, limit financial exposure, and preserve the complete decision trail.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>The verifier is part of the product</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The verifier is not decoration around the model. It is the system boundary.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Some actions should pass automatically. Some should require a human approval. Some should be blocked and returned with a reason that the product team can analyze. Those outcomes should be visible in evaluation results, not discovered after an incident.</p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>That is where agentic AI becomes serious. The model proposes. The system verifies. Humans approve what should not be automated.</p><!-- /wp:paragraph -->

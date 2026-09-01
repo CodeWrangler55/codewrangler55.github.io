@@ -4,22 +4,32 @@ AI can make a task faster and still fail to improve the business.
 
 Bill Gates has described the near-term value of AI as helping people do their jobs more efficiently. That is real. But efficiency is not automatically capacity.
 
-## The project
+## A faster task is not the same as more throughput
 
-I rebuilt this as an [AI Capacity Conversion War Room](https://codewrangler55.github.io/service-queue-simulation-lab/) for this problem.
+I keep seeing productivity claims measured inside a task: the draft took less time, the agent answered faster, the analyst completed the form in fewer minutes.
 
-The tool lets a leader choose a real operating scenario, then compare baseline backlog against AI-assisted backlog. It uses demand, staffing, case time, AI assistance, review burden, and operating hours to generate an executive capacity plan.
+Those numbers can be true while the backlog continues to grow. Review work may absorb the savings. Demand may rise. A different workstation may become the bottleneck. Or the organization may never decide what to do with the time it recovered.
 
-This is more useful than a productivity claim because it forces the operating question: did the saved time move the queue, or did review burden and demand pressure eat the gain?
+The business measure is not task speed. It is flow: how much finished work moves through the system, how much work is waiting, and where the constraint has moved.
 
-## GitHub reference
+## Throughput is a system property
 
-The best GitHub reference for this article is Michelin's [Throughput Strategy Game](https://github.com/michelin/Throughput-Strategy-Game). It is about maximizing finished work while limiting work in progress. That matters because AI productivity claims often focus on task speed, while executives care about flow: WIP, bottlenecks, throughput, and whether the system actually finishes more work.
+The [Throughput Strategy Game](https://github.com/michelin/Throughput-Strategy-Game) from Michelin is a useful way to make this visible. Its focus is maximizing finished work while limiting work in progress. That is a much better frame for AI productivity than a single before-and-after time measurement.
 
-## Why this matters
+The game makes two lessons hard to ignore. Total throughput cannot exceed the capacity of the slowest workstation. And when work requires several probabilistic steps, small failure rates compound quickly. A 90% success rate at each of five steps produces less than 60% end-to-end success.
 
-A team can save minutes inside a task while the backlog still grows. That can happen when demand is too high, review burden eats the savings, staffing is constrained, or management never redeploys the freed capacity.
+![Two lessons from Michelin's Throughput Strategy Game](https://codewrangler55.github.io/assets/blog/throughput-lessons.png)
 
-The model does not decide what saved time becomes. Leaders do.
+*Screenshot from the video [Throughput Strategy Game](https://www.youtube.com/watch?v=6v4X7XxZH5I).*
 
-Saved time can become faster service, more throughput, lower overtime, better quality control, or nothing measurable. The difference is operating design, and that is a CEO-level question.
+![Throughput Strategy Game gameplay overview](https://codewrangler55.github.io/assets/blog/throughput-in-a-nutshell.png)
+
+*Screenshot from the video [Throughput Strategy Game](https://www.youtube.com/watch?v=6v4X7XxZH5I).*
+
+## Convert saved time into a decision
+
+An AI implementation should make the capacity conversion explicit. Does the saved time create faster service, more completed work, lower overtime, better quality control, or simply more room for demand to expand?
+
+That answer requires operating design. It may mean changing staffing, moving work to a newly exposed constraint, reducing review burden, or protecting the recovered capacity from being consumed by low-value work.
+
+The model does not decide what saved time becomes. Leaders do. That is why AI productivity is ultimately a CEO and CFO question, not just a tooling question.

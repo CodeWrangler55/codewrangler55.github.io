@@ -2,27 +2,26 @@
 
 AI governance cannot live only in a document.
 
-Fei-Fei Li has described AI as a tool to augment people. I agree with that framing. But augmentation inside a business workflow still needs controls.
+Fei-Fei Li has described AI as a tool “to augment us.” I agree with that framing. But augmentation inside a business workflow still needs controls that work at runtime.
 
-## The project
+## Trust has to be implemented
 
-I built an [AI Trust Release Gate](https://codewrangler55.github.io/ai-trust-release-gate/) for a CFO and CIO audience.
+If citations are optional, the answer is not traceable. If PII boundaries are unproven, the risk is not controlled. If injection tests are missing, the system has not been challenged. If the audit trail is incomplete, the organization cannot explain what happened.
 
-It checks whether the AI feature has policy tests, mandatory citations, a proven PII boundary, prompt injection testing, a complete audit trail, and a rollback plan. The output is a release decision: limited production, supervised pilot only, or do not release.
+Those are product requirements, not just policy statements. They need an owner, a test, a pass or fail result, and a decision about what happens when the control fails.
 
-That is the right level for executives. The CFO sees risk, auditability, and exposure. The CIO sees production readiness, security, and architecture controls.
+## Governance at the point of action
 
-## GitHub reference
+Google's [Cybernetic Agent Governance Engine](https://github.com/google/cybernetic-agent-governance-engine) is a useful repository to study because it treats agent governance as runtime enforcement rather than a policy PDF.
 
-The strongest repo match is Google's [Cybernetic Agent Governance Engine](https://github.com/google/cybernetic-agent-governance-engine). CAGE is relevant because it treats agent governance as runtime enforcement, not a policy PDF. That is the core point of this post: trust has to be implemented as checks around model calls, tool use, evidence, policy, and auditability.
+That is the important shift. Controls need to sit around model calls, tool use, evidence, permissions, policy checks, and auditability. A release decision should reflect whether those controls have been tested, not whether the strategy document sounds responsible.
 
-## Why this matters
+For a CFO, this makes exposure and auditability visible. For a CIO, it makes production readiness and architecture controls concrete. For the product team, it creates a definition of done.
 
-Trust is not a sentence at the end of an AI strategy deck. It has to become part of the product.
+## Release trust with the feature
 
-If citations are optional, the answer is not traceable.
-If PII boundaries are unproven, the risk is not controlled.
-If injection tests are missing, the system has not been challenged.
-If the audit trail is incomplete, the organization cannot explain what happened.
+I want an AI feature to have a clear release posture: limited production, supervised pilot only, or do not release. The posture should change when the evidence changes.
 
-That is not anti-AI. That is how AI gets safely into production.
+That does not make the organization anti-AI. It makes the organization capable of using AI in consequential work without confusing confidence with control.
+
+Trust is not a sentence at the end of an AI strategy deck. It is part of the product, part of the release process, and part of the operating system that surrounds the model.
