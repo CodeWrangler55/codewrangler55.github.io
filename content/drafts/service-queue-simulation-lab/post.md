@@ -18,11 +18,11 @@ The [Throughput Strategy Game](https://github.com/michelin/Throughput-Strategy-G
 
 The game makes two lessons hard to ignore. Total throughput cannot exceed the capacity of the slowest workstation. And when work requires several probabilistic steps, small failure rates compound quickly. A 90% success rate at each of five steps produces less than 60% end-to-end success.
 
-![Two lessons from Michelin's Throughput Strategy Game](https://codewrangler55.github.io/assets/blog/throughput-lessons.png)
+![Two lessons from Michelin's Throughput Strategy Game](https://raw.githubusercontent.com/CodeWrangler55/codewrangler55.github.io/main/assets/blog/throughput-lessons.png)
 
 *Screenshot from the video [Throughput Strategy Game](https://www.youtube.com/watch?v=6v4X7XxZH5I).*
 
-![Throughput Strategy Game gameplay overview](https://codewrangler55.github.io/assets/blog/throughput-in-a-nutshell.png)
+![Throughput Strategy Game gameplay overview](https://raw.githubusercontent.com/CodeWrangler55/codewrangler55.github.io/main/assets/blog/throughput-in-a-nutshell.png)
 
 *Screenshot from the video [Throughput Strategy Game](https://www.youtube.com/watch?v=6v4X7XxZH5I).*
 
